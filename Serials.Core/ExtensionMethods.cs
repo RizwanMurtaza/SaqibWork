@@ -29,12 +29,22 @@ namespace Serials.Core
             return (long)timeSpan.TotalSeconds;
         }
 
-        public static DateTime UnixTimeStampToDateTime(long unixTimeStamp)
+        public static DateTime UnixTimeStampToDateTime(this long unixTimeStamp)
         {
             // Unix timestamp is seconds past epoch
             System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
             dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             return dtDateTime;
+        }
+        public static bool TryConvert<T>(int value, out T result)
+        {
+            result = default(T);
+            bool success = Enum.IsDefined(typeof(T), value);
+            if (success)
+            {
+                result = (T)Enum.ToObject(typeof(T), value);
+            }
+            return success;
         }
     }
 }

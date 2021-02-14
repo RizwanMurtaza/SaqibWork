@@ -6,32 +6,96 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Serials.Core;
+using Serials.Services;
 
 namespace Serials.Mvc.Razor.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ISerialsAccessService _serialsAccessService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ISerialsAccessService serialsAccessService)
         {
-            _logger = logger;
+            _serialsAccessService = serialsAccessService;
         }
 
-        public IActionResult Index()
+        // GET: ReadersController
+        public async Task<ActionResult> Index(string userName = "")
         {
-            return View();
+            var readers = await
+                _serialsAccessService.Find(new SearchRequest { SerialNumber = userName });
+            return View(readers);
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        [Route("Create")]
+        public IActionResult Create()
         {
-            return View();
+            var model = new SerialViewModel();
+            return View("~/Views/Home/CreateOrUpdate.cshtml", model);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        // POST: ReadersController/Create
+        [HttpPost]
+        [Route("Create")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(SerialViewModel model)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            try
+            {
+                if (!ModelState.IsValid)
+                    return View("~/Views/Home/CreateOrUpdate.cshtml", model);
+
+                await _serialsAccessService.Add(model);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View("~/Views/Home/CreateOrUpdate.cshtml", model);
+            }
+        }
+
+        [HttpGet]
+        [Route("Edit/{readerId}")]
+        public async Task<ActionResult> Edit(string readerId)
+        {
+            var serial = await _serialsAccessService.Single(readerId);
+
+            ViewBag.ReaderId = readerId;
+
+            return View("~/Views/Home/CreateOrUpdate.cshtml", serial);
+        }
+
+        // POST: ReadersController/Edit/5
+        [HttpPost]
+        [Route("Edit/{readerId}")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(SerialViewModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return View("~/Views/Home/CreateOrUpdate.cshtml", model);
+
+                await _serialsAccessService.Update(model);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View("~/Views/Home/CreateOrUpdate.cshtml", model);
+            }
+        }
+
+        [HttpGet]
+        [Route("Delete/{readerId}")]
+        public async Task<ActionResult> Delete(Guid readerId)
+        {
+            // await _serialsAccessService.(readerId);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

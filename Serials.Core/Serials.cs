@@ -1,5 +1,6 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
 using System;
+using System.Collections.Generic;
 
 namespace Serials.Core
 {
@@ -37,8 +38,8 @@ namespace Serials.Core
         [DynamoDBProperty("notes")]
         public string Notes { get; set; }
 
-        [DynamoDBProperty("activationHistory")]
-        public List<ActivationHistoryItem> ActivationHistory { get; set; }
+        //[DynamoDBProperty("activationHistory")]
+        //public List<ActivationHistoryItem> ActivationHistory { get; set; }
 
         [DynamoDBProperty("disabled")]
         public bool Disabled { get; set; }

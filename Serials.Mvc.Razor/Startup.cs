@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Serials.Data;
 using Serials.Services;
 
@@ -27,6 +28,18 @@ namespace Serials.Mvc.Razor
         {
             services.AddScoped<ISerialsRepository, SerialsRepository>();
             services.AddScoped<ISerialsAccessService, SerialsAccessService>();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(options => { options.LoginPath = "/Login"; });
+            services.AddMvc().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizeFolder("/");
+                options.Conventions.AllowAnonymousToPage("/Login");
+            });
             services.AddControllersWithViews().AddRazorRuntimeCompilation(); ;
         }
 
@@ -48,6 +61,7 @@ namespace Serials.Mvc.Razor
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

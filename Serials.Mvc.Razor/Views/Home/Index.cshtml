@@ -1,8 +1,69 @@
-﻿@{
+﻿@using Serials.Core
+@model List<SerialViewModel>
+@{
     ViewData["Title"] = "Home Page";
 }
+<style>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    .content {
+        padding: 40px 0;
+    }
+    /*
+    .filter-wrapper{
+      padding: 30px 0;
+    }*/
+
+    .filter-checkbox {
+        margin-left: 30px
+    }
+
+        .filter-checkbox:first-child {
+            margin-left: 0
+        }
+</style>
+<div class="container">
+    <div class="content">
+    </div>
+    <table id="example" class="table">
+        <thead>
+            <tr>
+                <th>SerialNumber</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>ActivationDate</th>
+                <th>Software</th>
+                <th>Info</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in @Model)
+            {
+                <tr>
+                    <td>@row.SerialNumber</td>
+                    <td>@row.Firstname</td>
+                    <td>@row.Lastname</td>
+                    <td>@row.Email</td>
+                    <td>@row.ActivationDate</td>
+                    <td>@row.Software</td>
+                    <td>@row.Info</td>
+                    <td>
+                        <a asp-area="" asp-controller="Serials" asp-action="Edit" asp-route-readerId="@row.SerialNumber">Edit</a>
+                    </td>
+                    <td>
+                        <a asp-area="" asp-controller="Serials" asp-action="Delete" asp-route-readerId="@row.SerialNumber">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        dataTable = $("#example").DataTable({
+       
+        });
+    });
+</script>

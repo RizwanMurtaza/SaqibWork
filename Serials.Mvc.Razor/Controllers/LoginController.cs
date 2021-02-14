@@ -55,9 +55,9 @@ namespace Serials.Mvc.Razor.Controllers
 
         [HttpGet]
         [Route("Edit/{readerId}")]
-        public async Task<ActionResult> Edit(Guid readerId)
+        public async Task<ActionResult> Edit(string readerId)
         {
-            var serial = await _serialsAccessService.Single(readerId.ToString());
+            var serial = await _serialsAccessService.Single(readerId);
 
             ViewBag.ReaderId = readerId;
 
