@@ -25,7 +25,7 @@ namespace Serials.Core
         {
             return new SerialViewModel
             {
-                ActivationDate = model.ActivationDate,
+                ActivationDate = model.ActivationDate.ToString(),
                 Email = model.Email,
                 Firstname = model.Firstname,
                 Lastname = model.Lastname,
@@ -38,7 +38,7 @@ namespace Serials.Core
         {
             return new Serials
             {
-                ActivationDate = model.ActivationDate,
+                ActivationDate = DateTime.Parse(model.ActivationDate).Ticks,
                 Email = model.Email,
                 Firstname = model.Firstname,
                 Lastname = model.Lastname,
