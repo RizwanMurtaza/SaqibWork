@@ -1,4 +1,5 @@
-﻿@model List<Serials.Core.SerialViewModel>
+﻿@using Serials.Core
+@model List<SerialViewModel>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -22,7 +23,7 @@
 </style>
 <div class="container">
     <div class="content">
-        <div class="row">
+        @*<div class="row">
             <div class="col-8">
 
             </div>
@@ -36,7 +37,7 @@
                     </select>
                 </div>
             </div>
-        </div>
+        </div>*@
     </div>
     <table id="example" class="table">
         <thead>
@@ -63,95 +64,42 @@
                     <td>@row.ActivationDate</td>
                     <td>@row.Software</td>
                     <td>@row.Info</td>
-                    <td><a asp-area="" asp-controller="Serials" asp-action="Edit" asp-route-readerId="@row.SerialNumber">Edit</a></td>
-                   @* <td><a asp-area="" asp-controller="Serials" asp-action="Delete" asp-route-readerId="@row.SerialNumber">Delete</a></td>*@
+                    <td>
+                        <a asp-area="" asp-controller="Serials" asp-action="Edit" asp-route-readerId="@row.SerialNumber">Edit</a>
+                    </td>
+                    <td>
+                        <a asp-area="" asp-controller="Serials" asp-action="Delete" asp-route-readerId="@row.SerialNumber">Delete</a>
+                    </td>
                 </tr>
             }
-            @*<tr>
-                    <td>Donna Snider</td>
-                    <td>Customer Support</td>
-                    <td>New York</td>
-                    <td>27</td>
-                    <td>2011/01/25</td>
-                    <td>$112,000</td>
-                    <td>
-                        <div class="badge status-badge badge-info">
-                            Draft
-                        </div>
-                    </td>
-                    <td>DRF</td>
-                </tr>*@
         </tbody>
-        <!--<tfoot>
-            <tr>
-                <th>
-                    <input type="text" id="search_0"
-                           class="form-control input-xs table-filter"
-                           style="width: 100%;"
-                           placeholder="Name" />
-                </th>
-                <th>
-                    <input type="text" id="search_1"
-                           class="form-control input-xs table-filter"
-                           style="width: 100%;"
-                           placeholder="Position" />
-                </th>
-                <th>
-                    <input type="text" id="search_2"
-                           class="form-control input-xs table-filter"
-                           style="width: 100%;"
-                           placeholder="Office" />
-                </th>
-                <th>
-                    <input type="text" id="search_3"
-                           class="form-control input-xs table-filter"
-                           style="width: 100%;"
-                           placeholder="Age" />
-                </th>
-                <th>
-                    <input type="text" id="search_4"
-                           class="form-control input-xs table-filter"
-                           style="width: 100%;"
-                           placeholder="Start date" />
-                </th>
-                <th>
-                    <input type="text" id="search_5"
-                           class="form-control input-xs table-filter"
-                           style="width: 100%;"
-                           placeholder="Salary" />
-                </th>
-                <th>-->
-        <!--<input type="text" id="search_6"
-            class="form-control input-xs table-filter"
-            style="width: 100%;"
-            placeholder="Status"/>  -->
-        <!--<select class="form-control status-dropdown">
-                    <option value="">All</option>
-                    <option value="DRF">Draft</option>
-                    <option value="PCH">Pending Review</option>
-                    <option value="PAU">Pending Authorisation</option>
-                    <option value="Received">Received</option>
-                    <option value="Processing">Processing</option>
-                    <option value="Query">Query</option>
-                    <option value="Approved">Approved</option>
-                    <option value="Rejected">Rejected</option>
-                    <option value="Amended">Amended</option>
-                    <option value="Cancelled">Cancelled</option>
-                </select>
-            </th>
-        </tr>-->
-        </tfoot>
+            @*<tr>
+                <td>Donna Snider</td>
+                <td>Customer Support</td>
+                <td>New York</td>
+                <td>27</td>
+                <td>2011/01/25</td>
+                <td>$112,000</td>
+                <td>
+                    <div class="badge status-badge badge-info">
+                        Draft
+                    </div>
+                </td>
+                <td>DRF</td>
+            </tr>*@
+        
+       
     </table>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
         dataTable = $("#example").DataTable({
-            "columnDefs": [
-                {
-                    "targets": [7],
-                    "visible": false
-                }
-            ]
+            //"columnDefs": [
+            //    {
+            //        "targets": [8],
+            //        "visible": false
+            //    }
+            //]
 
         });
 
@@ -183,7 +131,7 @@
             $('.status-dropdown').val(status)
             console.log(status)
             //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
-            dataTable.column(7).search(status).draw();
+            dataTable.column(9).search(status).draw();
         })
     });
 </script>
