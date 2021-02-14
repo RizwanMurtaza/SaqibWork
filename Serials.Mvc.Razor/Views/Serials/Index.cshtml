@@ -1,0 +1,67 @@
+﻿@model List<Serials.Core.SerialViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<a asp-area="" asp-controller="Readers" asp-action="Create" class="btn btn-primary my-2 float-md-right">Add Reader</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>SerialNumber</th>
+            <th>ActivationDate</th>
+            <th>Software</th>
+            <th>Info</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="mx-auto">
+            <td>
+                <form class="form" method="get" asp-controller="Readers" asp-action="Index">
+                    <div class="input-group mb-3">
+                        <input type="text" name="firstname" class="form-control" placeholder="Firstname" aria-label="Firstname" aria-describedby="button-addon2">
+                        <input type="text" name="lastname" class="form-control" placeholder="Lastname" aria-label="Lastname" aria-describedby="button-addon2">
+                        <input type="text" name="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="button-addon2">
+                        <input type="text" name="serialNumber" class="form-control" placeholder="SerialNumber" aria-label="SerialNumber" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </td>
+            @*@if (Model.ResultsType == DynamoDb.Contracts.ResultsType.Search)
+            {
+                <td class="py-md-3">
+                    <a class="py-4 stretched-link" asp-controller="Readers" asp-action="Index">Clear</a>
+                </td>
+            }*@
+        </tr>
+        @foreach (var row in @Model)
+        {
+    <tr>
+        <td>@row.Id</td>
+        <td>@row.Firstname</td>
+        <td>@row.Lastname</td>
+        <td>@row.Email</td>
+        <td>@row.SerialNumber</td>
+        <td>@row.ActivationDate</td>
+        <td>@row.Software</td>
+        <td>@row.Info</td>
+        <td><a asp-area="" asp-controller="Serials" asp-action="Edit" asp-route-readerId="@row.Id">Edit</a></td>
+        <td><a asp-area="" asp-controller="Serials" asp-action="Delete" asp-route-readerId="@row.Id">Delete</a></td>
+    </tr>
+        }
+        @if (Model == null || Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="6">No records found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

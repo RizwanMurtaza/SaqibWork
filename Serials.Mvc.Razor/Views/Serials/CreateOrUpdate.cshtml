@@ -1,0 +1,33 @@
+﻿@model Serials.Core.SerialViewModel
+
+<form method="post" asp-area="" asp-controller="Serials" asp-action="Edit">
+    <div class="form-group">
+        <label asp-for="Firstname"></label>
+        <input class="form-control" asp-for="Firstname" type="email" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Lastname"></label>
+        <input class="form-control" asp-for="Lastname" type="email" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" type="email" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SerialNumber"></label>
+        <input class="form-control" asp-for="SerialNumber" type="email" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ActivationDate"></label>
+        <input class="form-control" asp-for="ActivationDate" type="email" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Info"></label>
+        <input class="form-control" asp-for="Info" type="email" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Software"></label>
+        <input class="form-control" asp-for="Software" type="email" />
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+</form>
