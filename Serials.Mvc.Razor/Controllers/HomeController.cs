@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Serials.Core;
 using Serials.Services;
 
@@ -21,6 +22,7 @@ namespace Serials.Mvc.Razor.Controllers
         }
 
         // GET: ReadersController
+        [Authorize]
         public async Task<ActionResult> Index(string userName = "")
         {
             var readers = await

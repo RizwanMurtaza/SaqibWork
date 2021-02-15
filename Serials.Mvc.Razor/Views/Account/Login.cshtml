@@ -1,0 +1,21 @@
+﻿@using Serials.Core
+@using UserToLogin = Serials.Mvc.Razor.Controllers.UserToLogin
+@model UserToLogin
+@{
+    ViewData["Title"] = "Login";
+}
+<form method="post" asp-area="" asp-controller="Account" asp-action="Login">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input class="form-control" asp-for="UserName" />
+
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input class="form-control" asp-for="Password" type="password" />
+    </div>
+    <input type="submit" value="Login" />
+    @Html.AntiForgeryToken()
+</form>

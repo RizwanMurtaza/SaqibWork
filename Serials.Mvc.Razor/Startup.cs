@@ -28,18 +28,17 @@ namespace Serials.Mvc.Razor
         {
             services.AddScoped<ISerialsRepository, SerialsRepository>();
             services.AddScoped<ISerialsAccessService, SerialsAccessService>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                });
+            //services.AddMvc().AddRazorPagesOptions(options =>
+            //{
+            //    options.Conventions.AuthorizeFolder("/");
+            //    options.Conventions.AllowAnonymousToPage("/Login");
+            //});
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie(options => { options.LoginPath = "/Login"; });
-            services.AddMvc().AddRazorPagesOptions(options =>
-            {
-                options.Conventions.AuthorizeFolder("/");
-                options.Conventions.AllowAnonymousToPage("/Login");
-            });
             services.AddControllersWithViews().AddRazorRuntimeCompilation(); ;
         }
 
