@@ -2,7 +2,13 @@
 @using InputType = Serials.Core.InputType;
 @model SerialViewModel
 
+@{ 
+    var clsHide = Model.InputType == InputType.Create ? "d-none" : "";
+}
+
 <form class="form-horizontal" method="post" asp-area="" asp-controller="Home" asp-action="@ViewContext.RouteData.Values["action"].ToString()">
+    <input type="hidden" asp-for="InputType" />
+
     <div class="row">
         <div class="col-6 form-group">
             <label asp-for="SerialNumber"></label>
@@ -12,9 +18,10 @@
         <div class="col-6 form-group">
             <label asp-for="Email"></label>
             <input class="form-control" asp-for="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-6 form-group">
             <label asp-for="Firstname"></label>
@@ -28,22 +35,51 @@
     </div>
 
     <div class="row">
-        <div class="col-6 form-group @(@Model.InputType == InputType.Create? "d-none" : "")">
+        <div class="col-6 form-group @clsHide">
             <label asp-for="ActivationDate"></label>
-            <input class="form-control" asp-for="ActivationDate" />
+            <span></span>
+            <input class="form-control" asp-for="ActivationDate" readonly/>
         </div>
         <div class="col-6 form-group">
-            <label asp-for="SoftwareList"></label>
-            @*<select class="form-control dropdown" asp-for="Software" asp-items="Html.GetEnumSelectList<SoftwareEnum>()" ></select>*@
+            <label asp-for="SoftwareSelected"></label>
             <select class="form-control dropdown" asp-for="SoftwareSelected" asp-items="@Model.SoftwareList"></select>
         </div>
     </div>
-    
-    <div class="form-group">
-        <label asp-for="Info"></label>
-        <input class="form-control" asp-for="Info" />
+
+    <div class="row">
+        <div class="col-6 form-group">
+            <label asp-for="DeregistrationLimit"></label>
+            <input class="form-control" asp-for="DeregistrationLimit" />
+            <span asp-validation-for="DeregistrationLimit" class="text-danger"></span>
+        </div>
+        <div class="col-3 form-group">
+            <label asp-for="Language"></label>
+            <input class="form-control" asp-for="Language" />
+        </div>
+        <div class="col-3 form-group mt-3 pt-3">
+            <label asp-for="Active"></label>
+            <!-- Rounded switch -->
+            <label class="switch">
+                <input type="checkbox" asp-for="Active">
+                <span class="slider round"></span>
+            </label>
+        </div>
     </div>
-    
+
+    <div class="row @clsHide">
+        <div class="col-12 form-group">
+            <label asp-for="Info"></label>
+            <input class="form-control" asp-for="Info" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 form-group">
+            <label asp-for="Notes"></label>
+            <textarea class="form-control" asp-for="Notes" rows="3" ></textarea>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-6">
             <button class="btn btn-dark float-right" onclick="location.href='@Url.Action("Index")'" type="reset">Cancel</button>

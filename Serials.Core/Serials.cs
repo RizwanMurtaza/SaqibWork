@@ -18,7 +18,7 @@ namespace Serials.Core
         public string Lastname { get; set; }
 
         [DynamoDBProperty("activationDate")]
-        public long ActivationDate { get; set; }
+        public long? ActivationDate { get; set; }
 
         [DynamoDBProperty("activation")]
         public string Activation { get; set; }
@@ -38,11 +38,14 @@ namespace Serials.Core
         [DynamoDBProperty("notes")]
         public string Notes { get; set; }
 
-        //[DynamoDBProperty("activationHistory")]
-        //public List<ActivationHistoryItem> ActivationHistory { get; set; }
+        [DynamoDBProperty("activationHistory")]
+        public List<ActivationHistoryItem> ActivationHistory { get; set; }
 
         [DynamoDBProperty("disabled")]
         public bool Disabled { get; set; }
+
+        [DynamoDBProperty("deregistrationLimit")]
+        public int? DeregistrationLimit { get; set; }
     }
 
     public class ActivationHistoryItem
