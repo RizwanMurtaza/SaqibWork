@@ -28,6 +28,17 @@ namespace Serials.Mvc.Razor
         {
             services.AddScoped<ISerialsRepository, SerialsRepository>();
             services.AddScoped<ISerialsAccessService, SerialsAccessService>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                });
+            //services.AddMvc().AddRazorPagesOptions(options =>
+            //{
+            //    options.Conventions.AuthorizeFolder("/");
+            //    options.Conventions.AllowAnonymousToPage("/Login");
+            //});
+
 
             services.AddAuthentication(options =>
             {
@@ -47,6 +58,8 @@ namespace Serials.Mvc.Razor
             Environment.SetEnvironmentVariable("AWS_REGION", Configuration["AWS:Region"]);
 
             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+            services.AddControllersWithViews().AddRazorRuntimeCompilation(); ;
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
