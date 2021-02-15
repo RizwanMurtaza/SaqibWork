@@ -350,3 +350,5 @@ MigrationBackup/
 .ionide/
 Serials.Mvc.Razor/appsettings.Production.json
 Serials.Mvc.Razor/appsettings.Development.json
+Serials.Web/appsettings.Production.json
+Serials.Web/appsettings.Development.json
