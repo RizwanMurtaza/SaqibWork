@@ -11,7 +11,8 @@ namespace Serials.Services
         Task<List<SerialViewModel>> Find(SearchRequest searchReq);
         Task Add(SerialViewModel model);
         Task Update(SerialViewModel model);
-        Task Delete(SerialViewModel model);
+        Task Delete(string serialNumber);
         Task<SerialViewModel> Single(string id);
+        Task<string> GenerateNewSerial();
     }
 }

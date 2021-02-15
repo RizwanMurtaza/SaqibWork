@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+Serials.Mvc.Razor/appsettings.Production.json
+Serials.Mvc.Razor/appsettings.Development.json

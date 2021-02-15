@@ -23,17 +23,34 @@
 </style>
 <div class="container">
     <div class="content">
+        <div class="row">
+            <div class="col-8">
+            </div>
+            <div class="col-2">
+                @*<div class="btn-group submitter-group float-right">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Status</div>
+                        </div>
+                        <select class="form-control status-dropdown">
+                            <option value="">All</option>
+                        </select>
+                    </div>*@
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-primary float-right" onclick="location.href='@Url.Action("Create")'">Add new</button>
+            </div>
+        </div>
     </div>
     <table id="example" class="table">
         <thead>
             <tr>
-                <th>SerialNumber</th>
+                <th>Serial Number</th>
                 <th>FirstName</th>
                 <th>LastName</th>
                 <th>Email</th>
-                <th>ActivationDate</th>
+                <th>Activation Date</th>
                 <th>Software</th>
-                <th>Info</th>
+                @*<th>Info</th>*@
                 <th></th>
                 <th></th>
             </tr>
@@ -47,23 +64,46 @@
                     <td>@row.Lastname</td>
                     <td>@row.Email</td>
                     <td>@row.ActivationDate</td>
-                    <td>@row.Software</td>
-                    <td>@row.Info</td>
+                    <td>@row.SoftwareSelected</td>
+                    @*<td>@row.Info</td>*@
                     <td>
-                        <a asp-area="" asp-controller="Serials" asp-action="Edit" asp-route-readerId="@row.SerialNumber">Edit</a>
+                        <a asp-area="" asp-controller="Home" asp-action="Edit" asp-route-serialNumber="@row.SerialNumber">Edit</a>
                     </td>
                     <td>
-                        <a asp-area="" asp-controller="Serials" asp-action="Delete" asp-route-readerId="@row.SerialNumber">Delete</a>
+                        <a href="#" data-href='@Url.Action("Delete", "Home", new { serialNumber = row.SerialNumber})' 
+                           data-toggle="modal" data-target="#confirm-delete">Delete</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Confirm
+                </div>
+                <div class="modal-body">
+                    Are you sure that you want to delete this record?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
         dataTable = $("#example").DataTable({
        
+        });
+
+        // delete button confirmation
+        $('#confirm-delete').on('show.bs.modal', function (e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
         });
     });
 </script>

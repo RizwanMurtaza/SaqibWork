@@ -11,7 +11,7 @@ namespace Serials.Core
         Software1 =1,
         [Display(Name = "Software2")]
         Software2= 2,
-        [Display(Name = "Software4")]
+        [Display(Name = "Software3")]
         Software3= 3
     }
 }

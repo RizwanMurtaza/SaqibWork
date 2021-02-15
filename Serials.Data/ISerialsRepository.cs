@@ -10,7 +10,7 @@ namespace Serials.Data
         Task<List<Core.Serials>> All(string paginationToken = "");
         Task Add(Core.Serials entity);
         Task<IEnumerable<Core.Serials>> Find(SearchRequest searchReq);
-        Task Remove(Guid readerId);
+        Task Remove(string serialNumber);
         Task<Core.Serials> Single(string readerId);
         Task Update(Core.Serials entity);
     }
