@@ -33,7 +33,7 @@ namespace Serials.Core
         {
             // Unix timestamp is seconds past epoch
             System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp/1000).ToLocalTime();
             return dtDateTime;
         }
         public static bool TryConvert<T>(int value, out T result)

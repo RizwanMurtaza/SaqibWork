@@ -23,6 +23,23 @@
 </style>
 <div class="container">
     <div class="content">
+        <div class="row">
+            <div class="col-8">
+            </div>
+            <div class="col-2">
+                @*<div class="btn-group submitter-group float-right">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Status</div>
+                    </div>
+                    <select class="form-control status-dropdown">
+                        <option value="">All</option>
+                    </select>
+                </div>*@
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-primary float-right" onclick="location.href='@Url.Action("Create")'">Add new</button>
+            </div>
+        </div>
     </div>
     <table id="example" class="table">
         <thead>
@@ -33,7 +50,7 @@
                 <th>Email</th>
                 <th>ActivationDate</th>
                 <th>Software</th>
-                <th>Info</th>
+                @*<th>Info</th>*@
                 <th></th>
                 <th></th>
             </tr>
@@ -47,13 +64,13 @@
                     <td>@row.Lastname</td>
                     <td>@row.Email</td>
                     <td>@row.ActivationDate</td>
-                    <td>@row.Software</td>
-                    <td>@row.Info</td>
+                    <td>@row.SoftwareSelected</td>
+                    @*<td>@row.Info</td>*@
                     <td>
-                        <a asp-area="" asp-controller="Serials" asp-action="Edit" asp-route-readerId="@row.SerialNumber">Edit</a>
+                        <a asp-area="" asp-controller="Home" asp-action="Edit" asp-route-serialNumber="@row.SerialNumber">Edit</a>
                     </td>
                     <td>
-                        <a asp-area="" asp-controller="Serials" asp-action="Delete" asp-route-readerId="@row.SerialNumber">Delete</a>
+                        <a asp-area="" asp-controller="Home" asp-action="Delete" asp-route-serialNumber="@row.SerialNumber">Delete</a>
                     </td>
                 </tr>
             }

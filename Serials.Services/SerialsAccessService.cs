@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Serials.Core;
@@ -37,10 +38,9 @@ namespace Serials.Services
             var entity = SerialViewModel.ToEntity(model);
             await _repo.Update(entity);
         }
-        public async Task Delete(SerialViewModel model)
+        public async Task Delete(string serialNumber)
         {
-            var entity = SerialViewModel.ToEntity(model);
-            await _repo.Update(entity);
+            await _repo.Remove(serialNumber);
         }
         public async Task<SerialViewModel> Single(string id)
         {
@@ -49,7 +49,31 @@ namespace Serials.Services
         }
 
 
+        public async Task<string> GenerateNewSerial()
+        {
+            // Serial Format(5 sets of 4-digits separated by dashes): XXXX-XXXX-XXXX-XXXX-XXXX
+            var serialnumber = "";
+            Random random = new Random();
 
+            for (var i=0; i<5; i++)
+            {
+                for (var j=0; j<4; j++)
+                {
+                    var min = 0;
+                    var max = 9;
+                    var generatedNumber = random.Next(min, max);
+
+                    serialnumber = serialnumber + "" + generatedNumber;
+                }
+
+                if (i != 4)
+                {
+                    serialnumber = serialnumber + "-";
+                }
+            }
+
+            return serialnumber;
+        }
 
     }
 }

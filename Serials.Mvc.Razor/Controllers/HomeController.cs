@@ -1,10 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Serials.Mvc.Razor.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Serials.Core;
 using Serials.Services;
@@ -33,6 +27,7 @@ namespace Serials.Mvc.Razor.Controllers
         public IActionResult Create()
         {
             var model = new SerialViewModel();
+            model.SerialNumber = _serialsAccessService.GenerateNewSerial().ConfigureAwait(true).GetAwaiter().GetResult();
             return View("~/Views/Home/CreateOrUpdate.cshtml", model);
         }
 
@@ -58,19 +53,20 @@ namespace Serials.Mvc.Razor.Controllers
         }
 
         [HttpGet]
-        [Route("Edit/{readerId}")]
-        public async Task<ActionResult> Edit(string readerId)
+        [Route("Edit/{serialNumber}")]
+        public async Task<ActionResult> Edit(string serialNumber)
         {
-            var serial = await _serialsAccessService.Single(readerId);
+            var serial = await _serialsAccessService.Single(serialNumber);
+            serial.InputType = InputType.Update;
 
-            ViewBag.ReaderId = readerId;
+            ViewBag.ReaderId = serialNumber;
 
             return View("~/Views/Home/CreateOrUpdate.cshtml", serial);
         }
 
-        // POST: ReadersController/Edit/5
+        // POST: HomeController/Edit/5
         [HttpPost]
-        [Route("Edit/{readerId}")]
+        [Route("Edit/{serialNumber}")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(SerialViewModel model)
         {
@@ -90,10 +86,10 @@ namespace Serials.Mvc.Razor.Controllers
         }
 
         [HttpGet]
-        [Route("Delete/{readerId}")]
-        public async Task<ActionResult> Delete(Guid readerId)
+        [Route("Delete/{serialNumber}")]
+        public async Task<ActionResult> Delete(string serialNumber)
         {
-            // await _serialsAccessService.(readerId);
+            await _serialsAccessService.Delete(serialNumber);
 
             return RedirectToAction(nameof(Index));
         }

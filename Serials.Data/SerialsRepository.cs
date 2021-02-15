@@ -16,11 +16,7 @@ namespace Serials.Data
 
         public SerialsRepository()
         {
-            var config = new AmazonDynamoDBConfig
-            {
-                ServiceURL = "https://dynamodb.eu-west-2.amazonaws.com",
-            };
-            _client = new AmazonDynamoDBClient("AKIARX7E3AWWPF6UOGIF", "z5mEtwxFWBsIrhMxTM4IyWb2HhcTAVt0yi2YH2KL", config);
+            _client = new AmazonDynamoDBClient();
             _context = new DynamoDBContext(_client);
         }
         public async Task<List<Serials.Core.Serials>> All(string paginationToken = "")
@@ -63,9 +59,9 @@ namespace Serials.Data
             return await _context.ScanAsync<Core.Serials>(scanConditions, null).GetRemainingAsync();
         }
 
-        public async Task Remove(Guid readerId)
+        public async Task Remove(string serialNumber)
         {
-            await _context.DeleteAsync<Serials.Core.Serials>(readerId);
+            await _context.DeleteAsync<Serials.Core.Serials>(serialNumber);
         }
 
         public async Task<Serials.Core.Serials> Single(string readerId)

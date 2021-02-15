@@ -40,7 +40,13 @@ namespace Serials.Mvc.Razor
                 options.Conventions.AuthorizeFolder("/");
                 options.Conventions.AllowAnonymousToPage("/Login");
             });
-            services.AddControllersWithViews().AddRazorRuntimeCompilation(); ;
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            Environment.SetEnvironmentVariable("AWS_ACCESS_KEY_ID", Configuration["AWS:AccessKey"]);
+            Environment.SetEnvironmentVariable("AWS_SECRET_ACCESS_KEY", Configuration["AWS:SecretKey"]);
+            Environment.SetEnvironmentVariable("AWS_REGION", Configuration["AWS:Region"]);
+
+            services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
