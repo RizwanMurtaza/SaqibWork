@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Serials.Core;
 using Serials.Services;
 
-namespace Serials.Mvc.Razor.Controllers
+namespace Serials.Web.Controllers
 {
     public class HomeController : Controller
     {

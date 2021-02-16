@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serials.Data", "Serials.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serials.Services", "Serials.Services\Serials.Services.csproj", "{D3F6D8B2-B6D6-4365-A131-B67B3BBCD5E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serials.Mvc.Razor", "Serials.Mvc.Razor\Serials.Mvc.Razor.csproj", "{AB5A8303-A34D-4252-9119-FEEE88976A4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serials.Web", "Serials.Web\Serials.Web.csproj", "{EF2F1102-FDAC-4202-AE8A-C26A57EF1A73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{D3F6D8B2-B6D6-4365-A131-B67B3BBCD5E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3F6D8B2-B6D6-4365-A131-B67B3BBCD5E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3F6D8B2-B6D6-4365-A131-B67B3BBCD5E0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AB5A8303-A34D-4252-9119-FEEE88976A4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB5A8303-A34D-4252-9119-FEEE88976A4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB5A8303-A34D-4252-9119-FEEE88976A4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB5A8303-A34D-4252-9119-FEEE88976A4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF2F1102-FDAC-4202-AE8A-C26A57EF1A73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF2F1102-FDAC-4202-AE8A-C26A57EF1A73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF2F1102-FDAC-4202-AE8A-C26A57EF1A73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF2F1102-FDAC-4202-AE8A-C26A57EF1A73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

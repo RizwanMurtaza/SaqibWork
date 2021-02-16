@@ -1,6 +1,6 @@
 using System;
 
-namespace Serials.Mvc.Razor.Models
+namespace Serials.Web.Models
 {
     public class ErrorViewModel
     {
